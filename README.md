@@ -65,7 +65,7 @@ Run Sobol_driver_yield.R and Sobol_driver_carb.R to calculate the 1st order and 
 
 
 
-Reference beech growth model: Trasobares, A., Zingg, A., Walthert, L., Bigler, C. (2016) A climate-sensitive empirical growth and yield model for forest management planning of even-aged beech stands. Eur J Forest Res 135(2), 263-282. DOI: 10.1007/s10342-015-0934-7.
+*Reference beech growth model: Trasobares, A., Zingg, A., Walthert, L., Bigler, C. (2016) A climate-sensitive empirical growth and yield model for forest management planning of even-aged beech stands. Eur J Forest Res 135(2), 263-282. DOI: 10.1007/s10342-015-0934-7.
 
 Questions? Naomi Radke (naomikradke@gmail.com)
 
