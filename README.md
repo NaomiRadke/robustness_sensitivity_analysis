@@ -4,7 +4,7 @@ This repository contains the analysis scripts on which the results of the manusc
 The analysis scripts are written in the R Programming language.
 
 It contains the following scripts in the following sub-folders:
-###/precalibration
+### /precalibration
 - DEoptim_calibration_parallel.R
 - lGz_plot_lapply.R
 
@@ -39,7 +39,7 @@ This repository DOES NOT contain:
 
 We share these scripts to make the individual analysis steps transparent. We hope readers find them useful and can transfer them to their individual contexts of decision-making under deep uncertainty.
 
-===================================================================
+
 ## WORKFLOW
 
 ![Analysis flow and matching scripts.](analysis_flow.jpg)
@@ -63,7 +63,9 @@ Run carb_policy_parallel.R which runs the forest growth model under each scenari
 Run Sobol_driver_yield.R and Sobol_driver_carb.R to calculate the 1st order and total Sobol' sensitivity indices, which indicate the relative impact of each uncertain factor on the objectives' variance. Sobol_driver_yield.R calculates these indices for the variance in Net Present Value of timber yield and Sobol_driver_carb.R for the variance in net carbon sequestration. The Sobol scripts source the objective_function_yield_vect.R and objective_function_carb_vect.R, respectively.
 
 
-Reference beech growth model: Trasobares, A., Zingg, A., Walthert, L., Bigler, C. (2016) A climate-sensitive empirical growth and yield model for forest management planning of even-aged beech stands. Eur J Forest Res 135(2), 263-282. DOI: 10.1007/s10342-015-0934-7.
 
-Questions? Naomi Radke (naomikradke@gmail.com)
+
+**Reference beech growth model:** *Trasobares, A., Zingg, A., Walthert, L., Bigler, C. (2016) A climate-sensitive empirical growth and yield model for forest management planning of even-aged beech stands. Eur J Forest Res 135(2), 263-282. DOI: 10.1007/s10342-015-0934-7.*
+
+**Questions?** Naomi Radke (naomikradke@gmail.com)
 
