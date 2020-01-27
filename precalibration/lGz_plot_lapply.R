@@ -55,13 +55,13 @@
 #         - X1            parameter 1
 #         - X2            parameter 2
 #         - ...            
-#         - X22           parameter 22
+#         - Xx           parameter x
 #
 #- DEoptim              Matrix of the best parameter set found by optimization
 #         - V1            parameter 1
 #         - V2            parameter 2
 #         - ...            
-#         - V22           parameter 22
+#         - Vx           parameter x
 #
 #
 # Output:
@@ -75,7 +75,7 @@
 #         - X1            parameter 1
 #         - X2            parameter 2
 #         - ...            
-#         - X22           parameter 22
+#         - Xx           parameter x
 #
 #- lGz_comparison_acc  Dataframe of the stand's yearly volume growth at different stand ages for acceptable model scenarios, observation, original or best fit
 #         - lGz         yearly stand volume growth at a specific stand age (m3/ha/yr)
@@ -98,21 +98,22 @@ library(dplyr) # to stack dataframes for plotting
 library(GGally) # extension for ggplot to make the correlation pairs plot
 
 
-# Load input data for model and observed data
-stand_dat <- read.csv("data/initialization/initial_state_trees_tending_wu_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-clim_dat <- read.csv("data/initialization/climate_record_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-harvest_dat <- read.csv("data/initialization/harvest_scenarios_scaled_224_wu.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+# Load input data for model and observed data (not provided but can be exchanged with another forest growth model)
+stand_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+clim_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
 # observation
-obs_harvest_dat <- read.csv("data/precalibration/individ_trees_harvest_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # trees harvested for each harvest year
-obs_stand_aft <- read.csv("data/precalibration/indiv_dbh_h_understory_aft_harv_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # stand data after harvest
+obs_harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # trees harvested for each harvest year
+obs_stand_aft <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # stand data after harvest
 
 # Load the data frame with parameter value scenarios
-params <- read.csv("precalibration/Output/params_DEoptim_disturbed.csv", row.names = 1)
+params <- read.csv("output/precalibration/params_DEoptim_disturbed.csv", row.names = 1)
 
 # Load the best-fit parameter set created by DEoptim 
-load("precalibration/Output/DEoptim_out_5SE2019-11-29.RData") # best fit of original +-5SE by Trasobares et al 2016
+load("output/precalibration/DEoptim_out_5SE2019-11-29.RData") # best fit of original +-5SE by Trasobares et al 2016
 DEoptim <- out_DEoptim$optim$bestmem
 
+# Both the following forest growth model functions are not provided here
 # Source the function to calculate the dominate class:
 source("growth_model/dominate_class_function.R")
 
@@ -122,7 +123,7 @@ source("growth_model/growth_yield_stand_model_final.R")
 # ----- lGZ MODEL DATA ---------------------------
 
 # If the below function was run before (e.g. on a cluster), load the model_runs data and skip to the "best fit" section)
-load("precalibration/model_runs.RData")
+load("output/precalibration/model_runs.RData")
 
 # Run the model for each parameter set and output a list of dataframes, each containing the lgZ of the model run
 n.samples <- nrow(params)
@@ -251,7 +252,7 @@ lGz_models$Sources <- "model parameter examples" # add colour column for ggplot
 lGz_comparison <- rbind(lGz_models[,-1], lGz_obs, lGz_best_fit, lGz_orig) # finally, stack the models and the observed data into a single df
 
 #lGz_comparison as a csv file as input to plot the lgz in precalibration_plot.R 
-write.csv(lGz_comparison, "precalibration/Output/lGz_comparison.csv") # load the model, observed and best fit runs
+write.csv(lGz_comparison, "output/precalibration/lGz_comparison.csv") # load the model, observed and best fit runs
 
 
 # -------------------- Models within acceptable range --------------------------
@@ -317,4 +318,4 @@ lGz_models <- bind_rows(model_runs, .id = "model") # stack the models in the lis
 lGz_models$Sources <- "acceptable model parameter examples" # add colour column for ggplot
 lGz_comparison_acc <- rbind(lGz_models[,-1], lGz_obs, lGz_best_fit, lGz_orig) # finally, stack the models and the observed data into a single df
 
-write.csv(lGz_comparison_acc, "precalibration/Output/lGz_comparison_acc.csv")
+write.csv(lGz_comparison_acc, "output/precalibration/lGz_comparison_acc.csv")

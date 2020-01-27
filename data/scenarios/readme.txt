@@ -1,0 +1,2 @@
+Timber price index for wood products in Germany 1977-2018 where the price in 2010 is 100(%).
+Data source: Statistisches Bundesamt (2019): Preise. Preisindizes für Land- und Forstwirtschaft. (Fachserie 17, Reihe 1). Available on: https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Landwirtschaftspreisindex-Forstwirtschaftspreisindex/Publikationen/Downloads-Land-und-Forstwirtschaftpreise/erzeugerpreise-land-forstwirtschaft-2170100191094.pdf?__blob=publicationFile (last accessed: 28.01.2020)

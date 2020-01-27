@@ -204,7 +204,7 @@ output <-  foreach(i = 1:n.samples, .combine = rbind,# save output in a vector
   
 } # end lapply.. output: list with one value for each scenario
 
-save(output,file = "evaluation/Output/carb_scen_disc")
+save(output,file = "evaluation/Output/carb_scen_disc.RData")
 
 
 

@@ -92,13 +92,13 @@ library(DEoptim)
 
 # Load data for the forest.model 
 # initialization data
-stand_dat <- read.csv("Data/initial_state_trees_tending_wu_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-clim_dat <- read.csv("Data/climate_record_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-harvest_dat <- read.csv("Data/harvest_scenarios_scaled_224_wu.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+stand_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+clim_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
 
 # observations
-obs_harvest_dat <- read.csv("Data/individ_trees_harvest_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # trees harvested for each harvest year
-obs_stand_aft <- read.csv("Data/indiv_dbh_h_understory_aft_harv_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # stand data after harvest
+obs_harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # trees harvested for each harvest year
+obs_stand_aft <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # stand data after harvest
 
 
 # For the observed data, calculate volume of each tree in order to lateron calculate stand volume
@@ -112,16 +112,16 @@ obs_aft_volume <- aggregate(volume~year, data = obs_stand_aft, sum)
 obs_harvest_volume <- aggregate(volume~year, data = obs_harvest_dat, sum)
 
 
-
+#(both the following models cannot be provided here and can be exchanged with another forest growth model)
 # Source the function to calculate the dominate class:
 source("dominate_class_function.R")
 
 # Source the model
-source("fitting_vol_growth.R")
+source("fitting_vol_growth.R") # the model outputs the Root Mean Squared Error between observed and simulated yearly stand volume growth
 
 
 # load samples of the original parameters +-5*standard error
-params_init <-  read.csv("Data/LHS_params_scen_large.csv", row.names = 1) 
+params_init <-  read.csv("data/precalibration/LHS_params_scen_large.csv", row.names = 1) 
 
 
 # define bounds within which the algorithm searches (min and max value of each parameter)
@@ -142,7 +142,7 @@ model_RMSE = function(p, clim_dat, stand_dat, harvest_dat){
 out_DEoptim <- DEoptim(model_RMSE, bound.lower, bound.upper, clim_dat = clim_dat, stand_dat = stand_dat, harvest_dat = harvest_dat, 
                        DEoptim.control(itermax = 500, trace = FALSE))
 currentDate <- Sys.Date()
-FileName <- paste("OutputDEoptim_out", currentDate, ".RData", sep = "")
+FileName <- paste("output/precalibration/OutputDEoptim_out", currentDate, ".RData", sep = "")
 save(out_DEoptim, file = FileName)
 
 
@@ -178,4 +178,4 @@ for (p in 1:n.parameter) {
   parameters.sample.all[,p] <- bound.lower[p] + (bound.upper[p]-bound.lower[p])*(parameters.sample[,p])
 }
 
-write.csv(parameters.sample.all, "precalibration/Output/params_DEoptim_disturbed.csv")
+write.csv(parameters.sample.all, "output/precalibration/params_DEoptim_disturbed.csv")

@@ -87,15 +87,15 @@
 # Load required data
 
   # initialization data to run forest growth model
-  stand_dat <- read.csv("Data/initial_state_trees_tending_wu_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-  clim_dat <- read.csv("Data/climate_future_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-  harvest_dat <- read.csv("Data/harvest_scenarios_Altherr.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # Altherr thinning
+  stand_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+  clim_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+  harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # Altherr thinning
   
   # load input tables with scenarios
-  param_scen <- read.csv("Data/scenarios/params_acc_scen_disturbed.csv", row.names = 1)[,1:22] # acceptable model param scenarios
-  clim_scen <- read.csv("Data/scenarios/DI_scenarios.csv", row.names = 1) # nrow = nyears, ncol = 20 climate scenarios
-  pr_scen <- read.csv("Data/scenarios/PI_scen.csv", row.names = 1) # nrow = nyears, ncol = 10 scenarios price index
-  dr_scen <- read.csv("Data/scenarios/dr_scen_arma.csv", row.names = 1) # dr simulations with fitted ARMA
+  param_scen <- read.csv("data/scenarios/params_acc_scen_disturbed.csv", row.names = 1)[,1:22] # acceptable model param scenarios
+  clim_scen <- read.csv("data/scenarios/DI_scenarios.csv", row.names = 1) # nrow = nyears, ncol = 20 climate scenarios
+  pr_scen <- read.csv("data/scenarios/PI_scen.csv", row.names = 1) # nrow = nyears, ncol = 10 scenarios price index
+  dr_scen <- read.csv("data/scenarios/dr_scen_arma.csv", row.names = 1) # dr simulations with fitted ARMA
 
   
 # Define vectors that contain the scenarios for each uncertainty
@@ -110,6 +110,8 @@ scen <- expand.grid("model" = scen_model_params, "DI" = scen_DI, "DR" = scen_DR,
 
 # Source the required functions
 source("objective_function_parallel.R")  # source the objective function that calculates objective values for NPV timber and carbon
+
+#(the following functions are part of the growth model and are not provided here)
 source("growth_yield_stand_model_final.R") # source forest growth model
 source("dominate_class_function.R") # source dominant class function needed for forest model
 
@@ -139,7 +141,7 @@ scen_obj <- cbind(scen, obj_scen)
   
   # write csv file
   currentDate <- Sys.Date()
-  csvFileName <- paste("Output/robustness",currentDate,".csv",sep="")
+  csvFileName <- paste("output/evaluation/robustness",currentDate,".csv",sep="")
   write.csv(scen_obj, file = csvFileName)
   
   

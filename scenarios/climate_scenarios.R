@@ -63,7 +63,7 @@ model_names <- c("gfdl_2.6", "gfdl_4.5", "gfdl_6.0", "gfdl_8.5", "hadgem_2.6", "
             "ipsl_4.5", "ipsl_6.0", "ipsl_8.5", "miroc_2.6", "miroc_4.5", "miroc_6.0", "miroc_8.5", "noresm_2.6", "noresm_4.5",
             "noresm_6.0", "noresm_8.5") # vector with the model+rcp names to loop through
 
-file_names <- as.vector(c(list.files("data/climate/ISIMIP_Data_Jared_stand_cell")[1:20]))
+file_names <- as.vector(c(list.files("data/scenarios/ISIMIP_Data_Jared_stand_cell")[1:20]))
 
 #-------Load packages -----#
 library(lubridate) # to round daily data to monthly using function floor_date
@@ -181,12 +181,12 @@ model_order <- c("gfdl_2.6", "hadgem_2.6", "ipsl_2.6", "miroc_2.6", "noresm_2.6"
 
 DI <- DI[, model_order]
 
-write.csv(DI, "data/climate/Output/DI_scenarios.csv")
+write.csv(DI, "output/scenarios/DI_scenarios.csv")
 
 # "best guess" DI scenario (average of all scenarios)
 bg_DI <- rowMeans(DI)
 
-write.csv(bg_DI, "data/climate/Output/bg_DI_scen.csv")
+write.csv(bg_DI, "output/scenarios/bg_DI_scen.csv")
 
 # Save the "GDDI" values of every model in a dataframe
 GDDI <- sapply(list_averages, function(x) x[["GDDI"]]) # extract the GDDI column from every dataframe in the list
@@ -203,7 +203,7 @@ model_order <- c("gfdl_2.6", "hadgem_2.6", "ipsl_2.6", "miroc_2.6", "noresm_2.6"
 
 GDDI <- GDDI[, model_order]
 
-write.csv(GDDI, "data/climate/Output/GDDI_scenarios.csv")
+write.csv(GDDI, "GDDI_scenarios.csv")
 
 #------ Plot the monthly, yearly (April-Oct) and 6-yearly average for data recorded and models------
 
@@ -222,7 +222,7 @@ DI_plot <- ggplot(df, aes(x=year,y=DI, group = model)) +
   theme_bw()+
   theme(legend.position = "none")
 
-save(DI_plot, file = "scenarios/climate_scenarios/DI_plot.RData")
+save(DI_plot, file = "/DI_plot.RData")
 
 ggplot(df[seq(1,nrow(df), 5),], aes(year,DI, colour = model)) + 
   ylim(0,1)+

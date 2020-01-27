@@ -33,7 +33,7 @@ library(ggplot2)  # for plotting
 library(tseries) # for formatting as time series object
 
 
-dr <- read.csv("data/discount_rate/real_ir_deposits_bbk.csv", header = TRUE, sep = ";")
+dr <- read.csv("data/scenarios/real_ir_deposits_bbk.csv", header = TRUE, sep = ";")
 
 # change data into time series format
 dr$date <- as.Date(dr$date, "%d.%m.%Y") # change date column to date format
@@ -103,7 +103,7 @@ dr_plot <- autoplot(dr_orig_ts)+
   theme_bw()+
   theme(legend.position = "none")
 
-save(dr_plot, file ="dr_arma_plot.RData")
+save(dr_plot, file ="output/scenarios/dr_arma_plot.RData")
 
 # change the ts object into a dataframe
 sim_df <- as.data.frame(sim)
@@ -113,5 +113,5 @@ sim_df_5yr <- rollapply(sim_df, 5, FUN = mean, by =5, align = "left")
 sim_df_5yr <- sim_df_5yr/100 # change from percentage to real number
 
 # save the scenarios as csv file 
-write.csv(sim_df_5yr, file = "Output/dr_scen_arma.csv")
+write.csv(sim_df_5yr, file = "output/scenarios/dr_scen_arma.csv")
 

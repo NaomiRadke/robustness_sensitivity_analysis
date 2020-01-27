@@ -70,13 +70,13 @@ library(foreach) # for going parallel
 library(sensitivity) # for Sobol sensitivity analysis
 
 # load data to run forest model
-stand_dat <- read.csv("Data/initial_state_trees_tending_wu_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-clim_dat <- read.csv("Data/climate_future_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-harvest_dat <- read.csv("Data/harvest_scenarios_Altherr.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # Altherr thinning
+stand_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+clim_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # Altherr thinning
 
 # load input tables with scenarios
-param_scen <- read.csv("Data/scenarios/params_acc_scen_disturbed.csv", row.names = 1) # model parameter scenarios
-clim_scen <- read.csv("Data/scenarios/DI_scenarios.csv", row.names = 1) # climate scenarios, nrow = nyears, ncol = 20 scenarios
+param_scen <- read.csv("data/scenarios/params_acc_scen_disturbed.csv", row.names = 1) # model parameter scenarios
+clim_scen <- read.csv("data/scenarios/DI_scenarios.csv", row.names = 1) # climate scenarios, nrow = nyears, ncol = 20 scenarios
 
 # Some settings
 n.boot <- 700                                 # number of bootstraps for Sobol analysis
@@ -90,6 +90,7 @@ lhs_scen_carb <- data.frame(randomLHS(n.scen, n.param))
 
 # Source the required functions
 source("objective_function_carb_vect.R")  # source the objective function that calculates objective values for NPV timber and carbon
+#(the following functions are part of the growth model and are not provided here)
 source("growth_yield_stand_model_final.R") # source forest growth model
 source("dominate_class_function.R") # source dominant class function needed for forest model
 
@@ -171,7 +172,7 @@ Sobol_out_carb <- sobolSalt(model = Carbon_fct,
 
 # Save output
 currentDate <- Sys.Date()
-FileName <- paste("Output/Sobol_out_carb", currentDate, ".RData", sep = "")
+FileName <- paste("output/evaluation/Sobol_out_carb", currentDate, ".RData", sep = "")
 save(Sobol_out_carb, file = FileName)
 
 

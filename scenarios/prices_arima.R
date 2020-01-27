@@ -35,7 +35,7 @@ library(dplyr)
 library(zoo)
 
 # Load price data as time series
-WP <- read.csv("data/timber_prices/Preis_Index_Buch_1971_2016.csv", sep = ";")# read the data from csv
+WP <- read.csv("data/scenarios/price_index_destatis_1977-18.csv", sep = ";")# read the data from csv
 WP_ts <- ts(WP$price_index, start = 1977)                  # turn it into time series
 plot.ts(WP_ts)                                             # check for stationarity 
 
@@ -102,7 +102,7 @@ plot.ts(WP_ts)                                             # check for stationar
   }
   
   # save ts object
-  save(sim, file = "scenarios/timber_price/Output/timb_pric_simulations.RData")
+  save(sim, file = "output/scenarios/timb_pric_simulations.RData")
   
   # Plot the recoreded time series and plausible future trajectories  
   PI_plot <- autoplot(WP_ts)+
@@ -113,7 +113,7 @@ plot.ts(WP_ts)                                             # check for stationar
     theme_bw()+
     theme(legend.position = "none")
     
-  save(PI_plot, file ="scenarios/timber_price/PI_plot.RData")
+  save(PI_plot, file ="PI_plot.RData")
   
 
   # change the ts object into a dataframe
@@ -127,5 +127,5 @@ plot.ts(WP_ts)                                             # check for stationar
   
   
   # save the index scenarios as csv file 
-  write.csv(sim_df_5yr, file = "Output/PI_scen.csv")
+  write.csv(sim_df_5yr, file = "output/scenarios/PI_scen.csv")
  

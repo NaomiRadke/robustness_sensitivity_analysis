@@ -85,15 +85,15 @@ library(foreach) # for going parallel
 library(sensitivity) # for Sobol sensitivity analysis
 
 # load data to run forest model
-stand_dat <- read.csv("Data/initial_state_trees_tending_wu_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-clim_dat <- read.csv("Data/climate_future_224.csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
-harvest_dat <- read.csv("Data/harvest_scenarios_Altherr.csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # Altherr thinning
+stand_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+clim_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".")
+harvest_dat <- read.csv(".csv", header=TRUE, na.strings='(null)',sep=";", dec=".") # Altherr thinning
 
 # load input tables with scenarios
-param_scen <- read.csv("Data/scenarios/params_acc_scen_disturbed.csv", row.names = 1) # model parameter scenarios
-clim_scen <- read.csv("Data/scenarios/DI_scenarios.csv", row.names = 1) # climate scenarios, nrow = nyears, ncol = 20 scenarios
-pr_scen <- read.csv("Data/scenarios/PI_scen.csv", row.names = 1) # timber price index scenarios, nrow = nyears, ncol = 10 scenarios price index
-dr_scen <- read.csv("Data/scenarios/dr_scen_arma.csv", row.names = 1) # discount rate scenarios
+param_scen <- read.csv("data/scenarios/params_acc_scen_disturbed.csv", row.names = 1) # model parameter scenarios
+clim_scen <- read.csv("data/scenarios/DI_scenarios.csv", row.names = 1) # climate scenarios, nrow = nyears, ncol = 20 scenarios
+pr_scen <- read.csv("data/scenarios/PI_scen.csv", row.names = 1) # timber price index scenarios, nrow = nyears, ncol = 10 scenarios price index
+dr_scen <- read.csv("data/scenarios/dr_scen_arma.csv", row.names = 1) # discount rate scenarios
 
 # Some settings
 scen_model_params <- seq(1:nrow(param_scen))  # number of model parameter scenarios
@@ -113,6 +113,7 @@ lhs_scen_yield <- data.frame(randomLHS(n.scen, n.param))
 
 # Source the required functions
 source("objective_function_yield_vect.R")  # source the objective function that calculates objective values for NPV timber and carbon
+#(the following functions are part of the growth model and are not provided here)
 source("growth_yield_stand_model_final.R") # source forest growth model
 source("dominate_class_function.R") # source dominant class function needed for forest model
 
@@ -241,7 +242,7 @@ Sobol_out_NPV_timber <- sobolSalt(model = NPV_timber_fct,
 
 # Save output
 currentDate <- Sys.Date()
-FileName <- paste("Output/Sobol_out_NPVyield", currentDate, ".RData", sep = "")
+FileName <- paste("output/evaluation/Sobol_out_NPVyield", currentDate, ".RData", sep = "")
 save(Sobol_out_NPV_timber, file = FileName)
 
 
