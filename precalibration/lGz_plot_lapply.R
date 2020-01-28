@@ -1,15 +1,30 @@
+######################################################################################################
 #
+# lGz_plot_lapply.R     28 January 2020
+#
+# Copyright (C) 2020 Naomi Radke
+#
+#
+# 
 # This script calculates the lGz (yearly total volume growth) for every model period and for every parameter scenario
 # of the adapted forest growth model (original by Trasobares et al. (2016)). 
 # It compares the observed lGz with the one produce by the model scenarios in order to find an acceptably fitting subset
 # for use as scenarios that represent model parameter uncertainty.
 #
+#
+#
+# lGz_plot_lapply.R is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
+#
 # This code is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU Lesser General Public
+# License for more details (<http://www.gnu.org/licenses/>).
 #
 #
-# Any questions? Naomi Radke (naomikradke@gmail.com)
+# Any questions? Naomi Radke (naomikradke@gmail.com) 
 # ===================================================================================================
 #
 # Input:

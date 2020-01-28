@@ -1,12 +1,27 @@
 ######################################################################################################
+#
+# prices_arima.R     28 January 2020
+#
+# Copyright (C) 2020 Naomi Radke
+#
+#
+#
 # This script fits an ARIMA model to a timber price index time series in order to simulate future paths.
+#
+#
+#
+# prices_arima.R is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
 #
 # This code is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU Lesser General Public
+# License for more details (<http://www.gnu.org/licenses/>).
 #
 #
-# Any questions? Naomi Radke (naomikradke@gmail.com)  
+# Any questions? Naomi Radke (naomikradke@gmail.com) 
 # ===================================================================================================
 #
 # Input:

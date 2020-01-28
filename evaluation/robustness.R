@@ -1,24 +1,37 @@
 ################################################################################################################
 #
+# robustness.R     28 January 2020
+#
+# Copyright (C) 2020 Naomi Radke
+#
+#
+#
 # This script measures the robustness of the Altherr thinning regime under model parameter, climate, wood price,
 # carbon tax and discount rate uncertainty. Performance measures are NPV yield and NPV carbon (from objective fct.).
 # The uncertainty scenarios have been created using LHS previously.
 #
+#
+#
+# robustness.R is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
+#
 # This code is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU Lesser General Public
+# License for more details (<http://www.gnu.org/licenses/>).
 #
 #
-#
-# Any questions? Naomi Radke (naomikradke@gmail.com)
+# Any questions? Naomi Radke (naomikradke@gmail.com) 
 # ===================================================================================================
 #
 # Input:
 #- clim_dat             Climate data at stand location
 #         - stand_scen    stand index number
 #         - year          projection year (5 year increment)
-#         - DI            stand drought index
-#         - GDD           sum of degree-days (April-October)
+#         - DI            climate index 1
+#         - GDD           climate index 2
 #
 #- stand_dat            Beech stand data
 #         - stand_scen    stand index number
@@ -29,7 +42,7 @@
 #         - ni            number of trees per hectare
 #
 #
-#- harvest_dat          Harvesting plan according to the Altherr thinning regime
+#- harvest_dat          Harvesting plan according to a certain thinning strategy
 #         - stand_scen    stand index number
 #         - year          projection year when harvesting 
 #         - age           age of trees harvested during harvest year

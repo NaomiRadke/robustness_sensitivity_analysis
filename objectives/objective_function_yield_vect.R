@@ -1,10 +1,26 @@
 ############################################################################################################################
 #
-# This function outputs the NPV of timber yield  and can be sourced for Sobol Sensitivity analysis.
+# objective_function_yield_vect.R     28 January 2020
+#
+# Copyright (C) 2020 Naomi Radke
+#
+#
+#
+# This function calculates the Net Present Value of timber yield based on the forest growth 
+# model output data (stand volume growth (m3/ha) and harvested volume (m3/ha) in 5-year intervals).
+# It can be sourced for the Sobol Sensitivity analysis.
+#
+#
+#
+# objective_function_yield_vect.R is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
 #
 # This code is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU Lesser General Public
+# License for more details (<http://www.gnu.org/licenses/>).
 #
 #
 # Any questions? Naomi Radke (naomikradke@gmail.com) 
@@ -14,13 +30,13 @@
 #- clim_dat             Climate data at stand location
 #         - stand_scen    stand index number
 #         - year          projection year (5 year increment)
-#         - DI            stand drought index
-#         - GDD           sum of degree-days (April-October)
+#         - DI            climate index 1
+#         - GDD           climate index 2
 #- stand_dat            Beech stand data
 #         - stand_scen    stand index number
 #         - tree          tree number
 #         - species       tree species (integer; i.e, 41)
-#         - dbh           diameter at breast height
+#         - dbh           diameter at breast height (cm)
 #         - age           age of tree
 #         - ni            number of trees per hectare
 #

@@ -1,32 +1,43 @@
-
 ######################################################################################################################
+#
+# Sobol_driver_yield.R     28 January 2020
+#
+# Copyright (C) 2020 Naomi Radke
+#
+#
 #
 # This script performs a Sobol sensitivity analysis to rank the impact of the different uncertain parameters 
 # on the Net Present Value (NPV) of timber yield.
+# It sources the objective function which in turn sources the forest growth model
 #
 #
-# This script sources the objective function which in turn sources the forest growth model
+#
+# Sobol_driver_yield.R is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
 #
 # This code is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU Lesser General Public
+# License for more details (<http://www.gnu.org/licenses/>).
 #
 #
-# Any questions? Naomi Radke (naomikradke@gmail.com)
+# Any questions? Naomi Radke (naomikradke@gmail.com) 
 # ===================================================================================================
 #
 # Input:
 #- clim_dat             Climate data at stand location
 #         - stand_scen    stand index number
 #         - year          projection year (5 year increment)
-#         - DI            stand drought index
-#         - GDD           sum of degree-days (April-October)
+#         - DI            climate index 1
+#         - GDD           climate index 2
 #
 #- stand_dat            Beech stand data
 #         - stand_scen    stand index number
 #         - tree          tree number
 #         - species       tree species (integer; i.e, 41)
-#         - dbh           diameter at breast height
+#         - dbh           diameter at breast height (dbh)
 #         - age           age of tree
 #         - ni            number of trees per hectare
 #

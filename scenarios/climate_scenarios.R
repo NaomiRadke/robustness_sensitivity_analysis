@@ -1,5 +1,11 @@
 ######################################################################################################################
 #
+# climate_scenarios.R     28 January 2020
+#
+# Copyright (C) 2020 Naomi Radke
+#
+#
+#
 # This script calculates the yearly and 5-yearly drought index DI and degree day index GDDI for the years 2018-2088 
 # for RCPs 2.6, 4.5, 6.0 and 8.5 for each of the following CMIP5 models:
 # 1.) GFDL-ESM2M 
@@ -9,9 +15,16 @@
 # 5.) NorESM1-M 
 #
 #
+#
+# climate_scenarios.R is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or (at your
+# option) any later version.
+#
 # This code is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU Lesser General Public
+# License for more details (<http://www.gnu.org/licenses/>).
 #
 #
 # Any questions? Naomi Radke (naomikradke@gmail.com)  
