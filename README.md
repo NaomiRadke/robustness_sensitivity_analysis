@@ -1,28 +1,66 @@
 # Robustness and sensitivity analysis
 
-This repository contains the analysis scripts on which the results of the manuscript "Identifying decision-relevant uncertainties for dynamic adaptive forest management" are based.
+This repository contains the analysis scripts, input- and output data on which the results of the manuscript "Identifying decision-relevant uncertainties for dynamic adaptive forest management" are based.
 The analysis scripts are written in the R Programming language.
 
-It contains the following scripts in the following sub-folders:
+It contains the following scripts/data in the following sub-folders:
 ### /precalibration
-- DEoptim_calibration_parallel.R
-- lGz_plot_lapply.R
+- **DEoptim_calibration_parallel.R**: Runs a global opimization algorithm (DEoptim) over a defined value range for each growth model parameter
+- **lGz_plot_lapply.R**: Calculates the periodic stand volume growth (m3/ha/yr) for a sample of model parameter combinations to find an acceptable subset
 
 ### /objectives
-- objective_function_parallel.R
-- objective_function_yield_vect.R
-- objective_function_carb_vect.R
+- **objective_function_parallel.R**: calculates the 2 objectives Net Present Value (NPV) of timber yield and net carbon sequestration using forest growth model output (stand volume growth and volume harvested for every period). Sourced in robustness.R
+- **objective_function_yield_vect.R**: calculates the NPV of timber yield using forest growth model output (stand volume growth and volume harvested for every period). Sourced in Sobol_driver_yield.R
+- **objective_function_carb_vect.R**: calculates the net carbon sequestration using forest growth model output (stand volume growth and volume harvested for every period). Sourced in Sobol_driver_carb.R
 
 ### /scenarios 
-- climate_scenarios.R
-- prices_scenarios.R
-- dr_arima.R
+- **climate_scenarios.R**: time-variable climate scenarios
+- **prices_scenarios.R**: time-variable timber price index scenarios
+- **dr_arima.R**: time-variable discount rate scenario
 
 ### /evaluation
-- robustness.R
-- carb_policy_parallel.R
-- Sobol_driver_yield.R
-- Sobol_driver_carb.R
+- **robustness.R**: calculates the objectives' performance under each scenario and Y/N if minimum performance requirements are met
+- **carb_policy_parallel.R**: calculates the effect of introducing different levels of carbon taxes on the strategy's robustness
+- **Sobol_driver_yield.R**: calculates the 1st and total order sensitivities i.e. the relative effect of every uncertainty on NPV of timber yield
+- **Sobol_driver_carb.R**: calculates the 1st and total order sensitivities i.e. the relative effect of every uncertainty on net carbon sequestration
+
+### /data
+--> contains the data files used for precalibration and scenario creation. NOTE that the model parameter scenarios are based on the precalibration results and the data for the model parameter scenario creation can be found in the /output/precalibration folder.
+
+### /data/precalibration
+- LHS_params_scen_large.csv			
+
+
+### /data/scenarios
+- **price_index_destatis_1976-18.csv**: yearly data (1976-2018) for the price index of all wood harvested in Germany
+- **real_ir_deposits_bbk.csv**: monthly data on the real interest rate on household deposits by the Deutsche Bundesbank (1967-2019) 
+- **readme.txt**: information on the price index data
+- **ISIMIP_Data_stand_cell folder**: contains daily precipitation (mm) and temperature (°C) data (1950-2016) for the studied stand for 5 different global climate models/ 4 RCPs (.csv format + readme.txt)
+
+### /output           
+--> contains the output files of the growth model precalibration, scenario creation and evaluation (robustness, sensitivity, carbon policy) scripts
+
+### /output/precalibration
+- **DEoptim_out_5SE2019-11-29.RData**: RData containing, among others, the optimal model parameter set found by the DEoptim algorithm
+- **lGz_comparison.csv**: matrix containing the periodic volume growth (m3/ha/yr) for observed, best fit and a set of model parameter scenarios
+- **lGz_comparison_acc.csv**: matrix containing the periodic volume growth (m3/ha/yr) for observed, best fit and a set of acceptably performing model parameter scenarios
+- **model_runs.RData**: list for each model parameter scenario containing periodic volume growth (m3/ha/yr) for each time period 
+- **params_DEoptim_disturbed.csv**: sample of model parameters that diverge maximum 0.05* Root Mean Squared Error (in periodic stand volume growth) from the optimal model parameter set (found when running DEoptim script)
+
+### /output/scenarios                            
+- **DI_scenarios.csv**: climate (drought index) scenarios
+- **dr_scen_arma.csv**: discount rate scenarios
+- **dr_simulations_fitarma.RData**: time series of each discount rate simulation
+- **params_acc_scen_disturbed.csv**: model parameter scenarios
+- **PI_scen.csv**: timber price index scenarios 
+- **timb_pric_simulations.RData**: time series of each timber price index simulation 
+
+### /output/evaluation
+- **carb_scen_disc.RData**: vector containing discounted net carbon sequestration for every scenario
+- **robustness_2019_12_06.csv**: matrix containing the objective values (NPV timber yield and net carbon sequestration)  as well as Y/N are minimum performance requirements fulfilled for every scenario
+- **Sobol_out_carb_2019-12-06.RData**: RData containing (among others) the 1st order and total sensitivity indices + confidence intervals for the effect on net carbon sequestration
+- **Sobol_out_NPVyield_2019-12-07.RData**: RData containing (among others) the 1st order and total sensitivity indices + confidence intervals for the effect on NPV of timber yield
+
 
 Note that in each of these scripts, some edits will be necessary:
 - file names with date-stamps in the names
@@ -33,10 +71,8 @@ This repository DOES NOT contain:
 - the data used to:
 	- calibrate the model: individual tree long-term stand data (diameters and numbers at different stand ages)
 	- input data to the model (initial stand data, climate projection data, harvest pattern data)
-	- create climate scenarios: climate data by 5 Global Climate Models and 4 RCPs
-	- create timber price scenarios: timber price index data
-	- create discount rate scenarios: real discount rates on household deposits
-
+	
+	
 We share these scripts to make the individual analysis steps transparent. We hope readers find them useful and can transfer them to their individual contexts of decision-making under deep uncertainty.
 
 
